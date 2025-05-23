@@ -6,8 +6,8 @@ import os
 
 # --- PARAMÈTRES ---
 IMG_SIZE = (224, 224)
-BATCH_SIZE = 32
-DATASET_PATH = "pneumonia"
+BATCH_SIZE = 60
+DATASET_PATH = "new-data"
 
 # --- 1. CHARGEMENT DU DATASET ---
 train_ds = tf.keras.preprocessing.image_dataset_from_directory(
@@ -67,10 +67,13 @@ callbacks = [
 history = model.fit(
     train_ds,
     validation_data=val_ds,
-    epochs=15,
+    epochs=5,
     callbacks=callbacks
 )
 
 # --- 8. ÉVALUATION ---
 print("Évaluation sur le jeu de test :")
 model.evaluate(test_ds)
+
+# --- 9. SAUVEGARDE ---
+model.save("pneumonie_model.keras")
